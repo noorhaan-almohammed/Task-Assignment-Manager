@@ -23,8 +23,12 @@ use App\Http\Controllers\Auth\AuthController;
 
 /** without auth any user */
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('tasks', [TaskController::class, 'index']);
-Route::post('tasks', [TaskController::class, 'store']);
+Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/tasks/{task}', [TaskController::class, 'show']);
+Route::post('/tasks', [TaskController::class, 'store']);
+Route::put('/tasks/{task}/assign', [TaskController::class, 'assignTask']);
+Route::put('/tasks/{task}/status', [TaskController::class, 'updateStatus']);
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);

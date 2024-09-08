@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-
+use App\Models\Task;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTask extends FormRequest
+class assignRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,23 @@ class StoreTask extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:35|unique:tasks,title',
-            'description' => 'required|string|max:225',
             'user_id' => 'required|integer|exists:users,id',
-            'status_id' => 'required|integer|exists:statuses,id',
-            'priority_id' => 'required|integer|exists:priorities,id',
-            'execute_time' => 'required|integer',
-            'rate' => 'nullable|integer|min:0|max:5'
         ];
     }
-}
 
+    // public function passedValidation()
+    // {
+    //     $this->merge([
+    //         'assign_date' => now(),
+    //         'due_date' => now()->addDays($this->task->execute_time),
+    //     ]);
+    // }
+    public function validatedWithCasts ()
+    {
+        return $this->safe()->merge([
+            'assign_date' => now(),
+            'due_date' => now()->addDays($this->input('execute_time')), // استخدام input بدلاً من task->execute_time
+        ]);
+    }
+
+}
