@@ -67,4 +67,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Task::class);
     }
+    public function scopeAverageTaskRate($query)
+{
+    return $query->selectRaw('AVG(tasks.rate)')
+        ->join('tasks', 'users.id', '=', 'tasks.user_id')
+        ->whereNotNull('tasks.rate');
+}
 }

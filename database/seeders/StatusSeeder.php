@@ -8,7 +8,7 @@ class StatusSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('statuses')->insert([
+        DB::table('status_tasks')->insert([
             ['name' => 'Pending'],
             ['name' => 'In Progress'],
             ['name' => 'Completed'],

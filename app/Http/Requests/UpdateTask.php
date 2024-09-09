@@ -24,8 +24,7 @@ class UpdateTask extends FormRequest
         return [
             'title' => 'sometimes|string|max:35|unique:tasks,title',
             'description' => 'sometimes|string|max:225',
-            'status_id' => 'sometimes|integer|exists:statuses',
-            'priority_id' => 'sometimes|integer|exists:priorities',
+            'priority_id' => 'sometimes|integer|exists:priority_tasks',
             'execute_time' => 'sometimes|integer',
         ];
     }

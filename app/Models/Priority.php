@@ -9,8 +9,8 @@ class Priority extends Model
 {
     use HasFactory;
 
-    protected $fillable = "name";
-    protected $table = "priorityTasks";
+    protected $fillable = ["name"];
+    protected $table = "priority_tasks";
     public function tasks()
     {
         return $this->hasMany(Task::class);

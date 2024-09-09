@@ -27,19 +27,18 @@ class assignRequest extends FormRequest
         ];
     }
 
-    // public function passedValidation()
-    // {
-    //     $this->merge([
-    //         'assign_date' => now(),
-    //         'due_date' => now()->addDays($this->task->execute_time),
-    //     ]);
-    // }
     public function validatedWithCasts ()
     {
         return $this->safe()->merge([
             'assign_date' => now(),
-            'due_date' => now()->addDays($this->input('execute_time')), // استخدام input بدلاً من task->execute_time
+            'due_date' => now()->addDays($this->input('execute_time')),
         ]);
+    }
+    public function messages(): array
+    {
+        return [
+            'user_id.exists' => 'User ID Not Found.',
+        ];
     }
 
 }

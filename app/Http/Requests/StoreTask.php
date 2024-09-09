@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTask extends FormRequest
@@ -15,6 +16,15 @@ class StoreTask extends FormRequest
         return true;
     }
 
+    public function prepareForValidation():void
+    {
+        $this->merge([
+            'title' => ucwords($this->input('title'))
+        ]);
+        $this->merge([
+            'title'=>preg_replace('/\b/' , '' ,$this->title)
+        ]);
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,9 +35,8 @@ class StoreTask extends FormRequest
         return [
             'title' => 'required|string|max:35|unique:tasks,title',
             'description' => 'required|string|max:225',
-            'user_id' => 'required|integer|exists:users,id',
-            'status_id' => 'required|integer|exists:statuses,id',
-            'priority_id' => 'required|integer|exists:priorities,id',
+            'user_id' => 'nullable|integer|exists:users,id',
+            'priority_id' => 'required|integer|exists:priority_tasks,id',
             'execute_time' => 'required|integer',
             'rate' => 'nullable|integer|min:0|max:5'
         ];

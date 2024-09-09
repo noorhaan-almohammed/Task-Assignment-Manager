@@ -9,7 +9,7 @@ class PrioritySeeder extends Seeder
 {
     public function run()
     {
-        DB::table('priorities')->insert([
+        DB::table('priority_tasks')->insert([
             ['name' => 'Low'],
             ['name' => 'Medium'],
             ['name' => 'High'],

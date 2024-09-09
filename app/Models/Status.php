@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
-    protected $fillable = "name";
+    protected $fillable = ["name"];
 
-    protected $table = "statusTasks";
+    protected $table = "status_tasks";
 
     public function tasks()
     {

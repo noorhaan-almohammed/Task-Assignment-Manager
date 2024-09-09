@@ -13,14 +13,22 @@ use App\Http\Requests\StoreUserRequest;
 class UserController extends Controller
 {
     /**
-     * show all users
+     * User service instance
      */
-     protected $userService;
-     public function __construct(UserService $userService){
-        $this->userService = $userService;
-     }
+    protected $userService;
+
     /**
-     * Show All Users
+     * Constructor to inject UserService
+     *
+     * @param UserService $userService
+     */
+    public function __construct(UserService $userService){
+        $this->userService = $userService;
+    }
+
+    /**
+     * Show all users
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index()
@@ -29,16 +37,25 @@ class UserController extends Controller
     }
 
     /**
-     * create new user
+     * Create a new user
+     *
+     * @param StoreUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreUserRequest $request)
     {
+        // Validate the request
         $validated = $request->validated();
+
+        // Call user service to add a new user
         return $this->userService->addUser($validated);
     }
 
     /**
-     * Show A Spicific User
+     * Show a specific user by ID
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -46,27 +63,30 @@ class UserController extends Controller
     }
 
     /**
+     * Update a user's information
      *
+     * @param UpdateUserForm $request
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateUserForm $request, User $user)
     {
-        // $data = $request->validate([
-        //     'name' => 'sometimes|string|min:8|max:255',
-        //     'email' => 'sometimes|string|email|max:255|unique:users,email',
-        //     'password' => 'sometimes|string|min:8',
-        //     'role' => 'sometimes|IN:admin,manager,employee',
-        // ]);
-        // $user->update($data);
-        // return $user;
+        // Validate the request
         $data = $request->validated();
+
+        // Call user service to update the user's information
         return $this->userService->updateUser($data, $user);
     }
 
     /**
-     * delete user
+     * Delete a user
+     *
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $user)
     {
+        // Call user service to delete the user
         return $this->userService->delete($user);
-       }
+    }
 }

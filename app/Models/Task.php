@@ -28,19 +28,58 @@ class Task extends Model
     {
         return $this->belongsTo(Priority::class);
     }
-    // protected $appends = ['user_name', 'status_name', 'priority_name'];
+    public function scopePriority($query, $priority)
+    {
+        return $query->where('priority_id', $priority);
+    }
+
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status_id', $status);
+    }
+
+    public function scopeWithDeleted($query)
+    {
+        return $query->withTrashed();
+    }
+
+    public function scopeOnlyDeleted($query)
+    {
+        return $query->onlyTrashed();
+    }
+
+    public function scopeWithoutDeleted($query)
+    {
+        return $query->withoutTrashed();
+    }
+    protected $appends = ['user_name', 'status_name', 'priority_name'];
 
 
-    // public function getStatusNameAttribute() {
-    //     return $this->status ? $this->status->name : null;
-    // }
+    public function getStatusNameAttribute() {
+        return $this->status ? $this->status->name : null;
+    }
 
-    // public function getPriorityNameAttribute() {
-    //     return $this->priority ? $this->priority->name : null;
-    // }
+    public function getPriorityNameAttribute() {
+        return $this->priority ? $this->priority->name : null;
+    }
 
-    // public function getUserNameAttribute() {
-    //     return $this->user ? $this->user->name : null;
-    // }
+    public function getUserNameAttribute() {
+        return $this->user ? $this->user->name : null;
+    }
+
+    public function getDueDateAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('d-m-Y H:i') : null;
+    }
+
+    public function getCompleteDateAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('d-m-Y H:i') : null;
+    }
+
+    public function getAssignDateAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('d-m-Y H:i') : null;
+    }
 
 }

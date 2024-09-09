@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +22,9 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:35',
-            'email' => 'required|string|email|max:45|unique:users,email',
-            'password' => 'required|string|min:8',
-            'role' => 'required|IN:admin,manager,employee',
+            'status_id' => 'required|integer|in:3,4'
         ];
     }
-    public function passedValidation(){
-        $this->merge([
-            'password' => Hash::make($this->password),
-        ]);
-    }
+
+    
 }
