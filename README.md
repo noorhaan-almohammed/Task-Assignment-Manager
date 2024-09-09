@@ -27,33 +27,38 @@ This Laravel Task Manager application allows users to manage tasks with role-bas
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/your-username/laravel-task-manager.git
-   cd laravel-task-manager
-   ```
+```
+git clone https://github.com/your-username/laravel-task-manager.git
+cd laravel-task-manager
+```
+
 2. **Install dependencies:**
-     ```
-     composer install
-     ```
+ ```
+ composer install
+ ```
+
 3. **Create a .env file:**
 ```
      cp .env.example .env
 ```
+
 4. **Generate the application key:**
 ```
 php artisan key:generate
 ```
+
 5. **Run database migrations and seed the database:**
 ```
 php artisan migrate
 php artisan db:seed
 ```
+
 6. **Start the development server:**
 ```
 php artisan serve
 ```
 
-The application will be available at http://localhost:8000.
+The application will be available at http://localhost:8000. or 8001
 
 <h2>API Endpoints</h2>
 
