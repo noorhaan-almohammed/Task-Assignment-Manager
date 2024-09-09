@@ -56,44 +56,48 @@ php artisan serve
 The application will be available at http://localhost:8000.
 
 <h2>API Endpoints</h2>
-.**List Tasks**
+**List Tasks**
 ```
 GET /api/tasks
 ```
-Query Parameters:
+  
+  Query Parameters:
     withDeleted (boolean): Include soft-deleted tasks.
-.**Create Task**    
+**Create Task**    
 ```
 POST /api/tasks
 ```
-Request Body:
+   Request Body:
 
-1.title (string)
-2.description (string)
-3.priority_id (integer)
-4.status_id (integer)
-5.execute_time (integer, optional)
-6.user_id (integer, optional)
+    1.title (string)
+    2.description (string)
+    3.priority_id (integer)
+    4.status_id (integer)
+    5.execute_time (integer, optional)
+    6.user_id (integer, optional)
+
 **Get Task by ID**
 ```
 GET /api/tasks/{id}
 ```
+
 **Update Task**
 ```
 PUT /api/tasks/{id}
 ```
-Request Body:
+  Request Body:
 
     title (string, optional)
     description (string, optional)
     priority_id (integer, optional)
     execute_time (integer, optional)
     user_id (integer, optional)
+
 **Assign Task**
 ```
 POST /api/tasks/{id}/assign
 ```
-Request Body:
+  Request Body:
 
     user_id (integer)
     assign_date (date)
