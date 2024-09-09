@@ -56,6 +56,7 @@ php artisan serve
 The application will be available at http://localhost:8000.
 
 <h2>API Endpoints</h2>
+
 **List Tasks**
 ```
 GET /api/tasks
